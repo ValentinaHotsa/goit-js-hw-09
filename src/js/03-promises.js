@@ -1,14 +1,18 @@
 import { Notify } from 'notiflix';
 const containerForm = document.querySelector('.form');
 
-let delay = Number(containerForm.elements.delay.value);
-let step = Number(containerForm.elements.step.value);
-let amount = Number(containerForm.elements.amount.value);
+let delay = 0;
+let step = 0;
+let amount = 0;
 
 containerForm.addEventListener('submit', clbck);
+
 function clbck(event) {
+  delay = Number(containerForm.elements.delay.value);
+  step = Number(containerForm.elements.step.value);
+  amount = Number(containerForm.elements.amount.value);
   event.preventDefault();
-  for (let index = 0; index < amount; index++) {
+  for (let index = 1; index <= amount; index++) {
     createPromise(index, delay)
       .then(({ position, delay }) => {
         Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
